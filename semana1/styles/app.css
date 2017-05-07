@@ -1,0 +1,19 @@
+.myfontnoerror{
+  color: green;
+}
+
+.myfonterror{
+  color: red;
+}
+
+.mybordernoerror{
+  border-color: green;
+}
+
+.mybordererror{
+  border-color: red;
+}
+
+.myborderdefault{
+  border-color: #ccc;
+}

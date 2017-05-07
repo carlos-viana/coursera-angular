@@ -6,6 +6,7 @@
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/app.css">
     <style>
       .message { font-size: 1.3em; font-weight: bold; }
     </style>
@@ -20,13 +21,14 @@
              <input id="lunch-menu" type="text"
              placeholder="list comma separated dishes you usually have for lunch"
              class="form-control"
-             ng-model="lunchItens">
+             ng-model="lunchItens"
+             ng-class="customStyle.borderclass">
          </div>
          <div class="form-group">
              <button class="btn btn-default"
                 ng-click="displayIfTooMuch();">Check If Too Much</button>
          </div>
-         <div class="form-group message">
+         <div class="form-group message" ng-class="customStyle.fontclass">
            {{outmsg}}
          </div>
    </div>

@@ -12,6 +12,7 @@ function LunchCheckController($scope) {
   $scope.displayIfTooMuch = function () {
     if ($scope.lunchItens == "") {
       $scope.outmsg = "Please enter data first";
+      turnRed();
       return;
     }
     var nItens = calculateNumberOfNotEmptyItensForString($scope.lunchItens);
@@ -19,11 +20,14 @@ function LunchCheckController($scope) {
     if (nItens == 0) {
       $scope.outmsg = "";
       $scope.lunchItens = "";
+      cleanStyle();
     } else if (nItens <= 3) {
       $scope.outmsg = "Enjoy!";
+      turnGreen();
     }
     else {
       $scope.outmsg = "Too much!";
+      turnGreen();
     }
   };
 
@@ -44,6 +48,21 @@ function LunchCheckController($scope) {
   //   var aStrings = string.split(',');
   //   return aString.length;
   // }
+
+  // Lidar com styles
+  $scope.customStyle = {};
+  function turnGreen () {
+      $scope.customStyle.fontclass = "myfontnoerror";
+      $scope.customStyle.borderclass = "mybordernoerror";
+  };
+  function turnRed () {
+      $scope.customStyle.fontclass = "myfonterror";
+      $scope.customStyle.borderclass = "mybordererror";
+  };
+  function cleanStyle () {
+    $scope.customStyle.borderclass = "myborderdefault";
+  }
+
 }
 
 }());
