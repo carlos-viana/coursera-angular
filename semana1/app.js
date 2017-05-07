@@ -36,7 +36,6 @@ function LunchCheckController($scope) {
         notEmptyItens += 1;
       }
     }
-    console.log("qtde: " + notEmptyItens);
     return notEmptyItens;
   }
 
