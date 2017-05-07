@@ -15,7 +15,11 @@ function LunchCheckController($scope) {
       return;
     }
     var nItens = calculateNumberOfNotEmptyItensForString($scope.lunchItens);
-    if (nItens <= 3) {
+    // Trata o caso do usuário inserir apenas ',' na caixa de texto.
+    if (nItens == 0) {
+      $scope.outmsg = "Please enter data first";
+      $scope.lunchItens = "";
+    } else if (nItens <= 3) {
       $scope.outmsg = "Enjoy!";
     }
     else {
@@ -32,6 +36,7 @@ function LunchCheckController($scope) {
         notEmptyItens += 1;
       }
     }
+    console.log("qtde: " + notEmptyItens);
     return notEmptyItens;
   }
 
@@ -40,7 +45,6 @@ function LunchCheckController($scope) {
   //   var aStrings = string.split(',');
   //   return aString.length;
   // }
-
 }
 
 }());
