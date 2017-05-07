@@ -17,7 +17,7 @@ function LunchCheckController($scope) {
     var nItens = calculateNumberOfNotEmptyItensForString($scope.lunchItens);
     // Trata o caso do usuário inserir apenas ',' na caixa de texto.
     if (nItens == 0) {
-      $scope.outmsg = "Please enter data first";
+      $scope.outmsg = "";
       $scope.lunchItens = "";
     } else if (nItens <= 3) {
       $scope.outmsg = "Enjoy!";
