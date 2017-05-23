@@ -1,0 +1,12 @@
+<div ng-if="!dirCtrl.errorMsg" class="list-group">
+<ol class="cv-ol">
+  <li ng-repeat="item in dirCtrl.found" class="list-group-item">
+    <h4 class="list-group-item-heading">{{ item.short_name }} - {{ item.name }}</h4>
+    <p class="list-group-item-text">{{ item.description }}</p>
+    <button
+      class="btn btn-default cv-item-button"
+      ng-click="dirCtrl.onRemove({index: $index});">Don't want this one!</button>
+  </li>
+</ol>
+</div>
+<div ng-if="dirCtrl.itemIsNotInList()" class="alert alert-danger cv-alert">Nothing found</div>
