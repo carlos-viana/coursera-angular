@@ -5,11 +5,10 @@ angular.module('MenuApp')
 .controller('ItemsController', ItemsController);
 
 
-ItemsController.$inject = ['$stateParams', 'MenuDataService', 'responseItems'];
-function ItemsController($stateParams, MenuDataService, responseItems) {
+ItemsController.$inject = ['$stateParams', 'MenuDataService', 'categoryItemsList'];
+function ItemsController($stateParams, MenuDataService, categoryItemsList) {
   var itemsOfCategory = this;
-  itemsOfCategory.items = responseItems.data.menu_items;
-  itemsOfCategory.categoryShortName = $stateParams.shortName;
+  itemsOfCategory.items = categoryItemsList;
 }
 
 })();

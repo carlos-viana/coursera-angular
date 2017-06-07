@@ -4,11 +4,10 @@
 angular.module('MenuApp')
 .controller('MainCategoryListController', MainCategoryListController);
 
-
-MainCategoryListController.$inject = ['MenuDataService', 'response'];
-function MainCategoryListController(MenuDataService, response) {
+MainCategoryListController.$inject = ['MenuDataService', 'categoryList'];
+function MainCategoryListController(MenuDataService, categoryList) {
   var mainlist = this;
-  mainlist.items = response.data;
+  mainlist.categories = categoryList;
 }
 
 })();
