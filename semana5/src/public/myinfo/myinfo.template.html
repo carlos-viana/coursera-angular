@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="cv-error" ng-if="!vm.user">Not Signed Up Yet.
+    <a ui-sref="public.signup" class="cv-link-register">Sign up Now!</a>
+  </div>
+  <div ng-show="vm.user">
+    <p>Registred Information</p>
+    <dl class="dl-horizontal">
+      <dt>First Name:</dt>
+      <dd>{{vm.user.firstname | uppercase}}</dd>
+      <dt>Last Name:</dt>
+      <dd>{{vm.user.lastname | uppercase}}</dd>
+      <dt>Email:</dt>
+      <dd>{{vm.user.email | lowercase}}</dd>
+      <dt>Phone:</dt>
+      <dd>{{vm.user.phone | uppercase}}</dd>
+      <dt>Favorite dish:</dt>
+      <dd>{{vm.user.menunumber}}</dd>
+    </dl>
+
+    <menu-item menu-item="vm.menuitem"></menu-item>
+
+  </div>
+</div>

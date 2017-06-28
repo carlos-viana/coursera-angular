@@ -1,0 +1,95 @@
+<div class="container">
+  <fieldset>
+    <legend>Sign Up</legend>
+    <form name='regForm' novalidate>
+
+      <div class="form-group">
+        <label for="formGroupFirstName">First name</label>
+        <input type="text"
+          class="form-control"
+          placeholder="First name"
+          id="formGroupFirstName"
+          name="firstname"
+          ng-model="vm.user.firstname" minlength="4" ng-maxlength="20">
+          <span ng-if="(regForm.firstname.$error.minlength ||
+            regForm.firstname.$error.required) && regForm.firstname.$touched">
+          User First Name must be at least 4 characters long</span>
+          <span ng-if="regForm.firstname.$error.maxlength &&
+            regForm.firstname.$touched">
+            User First Name must not be longer than 20 characters</span>
+      </div>
+
+      <div class="form-group">
+        <label for="formGroupLastName">Last name</label>
+        <input type="text"
+          class="form-control"
+          placeholder="Last name"
+          id="formGroupLastName"
+          name="lastname"
+          ng-model="vm.user.lastname" minlength="4" ng-maxlength="20">
+        <span ng-if="(regForm.lastname.$error.minlength ||
+          regForm.lastname.$error.required) && regForm.lastname.$touched">
+          User First Name must be at least 4 characters long</span>
+        <span ng-if="regForm.lastname.$error.maxlength &&
+          regForm.lastname.$touched">
+          User First Name must not be longer than 20 characters</span>
+      </div>
+
+      <div class="form-group">
+        <label for="formGroupEmail">Email</label>
+        <input type="email"
+          class="form-control"
+          placeholder="Enter Email"
+          id="formGroupEmail"
+          name="email"
+          ng-model="vm.user.email">
+        <span ng-if="regForm.email.$invalid && regForm.email.$touched">
+          Must be a valid email address: handle@domain format</span>
+      </div>
+
+      <div class="form-group">
+        <label for="formGroupPhone">Phone</label>
+        <input type="text"
+          class="form-control"
+          placeholder="Phone ###-####-####"
+          id="formGroupPhone"
+          name="phone"
+          ng-model="vm.user.phone" pattern="(\d{3})-(\d{4})-(\d{4})">
+        <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">
+          Phone must be in the format ###-####-####.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="formGroupMenuNumber">Favorite dish menu</label>
+        <input type="text"
+          class="form-control"
+          placeholder="Favorite Dish"
+          id="formGroupMenuNumber"
+          name="menunumber"
+          ng-model="vm.user.menunumber"
+          ng-model-options='{ debounce: 1000 }'
+          ng-change='vm.checkForMenuItems()'
+          required>
+        <p id="menunumberHelpBlock" class="form-text text-muted">
+          Favorite dish menu (short name)
+        </p>
+        <div ng-if="vm.hasMenuItems != undefined && !vm.hasMenuItems"
+          class="cv-error" >No such menu number exists</div>
+      </div>
+
+      <button class="btn btn-primary"
+        ng-disabled="regForm.$invalid ||
+          (vm.hasMenuItems != undefined && !vm.hasMenuItems)")
+        ng-click="vm.submit()">Submit
+      </button>
+
+      </form>
+  </fieldset>
+
+  <br>
+
+  <div ng-if="vm.dataWasSaved"
+    class="cv-msg-sucess">Your information has been saved.
+  </div>
+
+</div>
