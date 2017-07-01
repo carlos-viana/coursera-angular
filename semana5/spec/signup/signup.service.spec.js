@@ -37,6 +37,27 @@ describe("MenuServiceTests", function() {
     $httpBackend.flush();
   });
 
+  it('should return menu items when Server Eror', function() {
+    var result, error;
+
+    $httpBackend.when('GET', ApiPath + '/menu_items.json')
+      .respond(500);
+
+    menuservice.getMenuItems(null).then(
+      function(data) {
+        result = data;
+      },
+      function(data) {
+        error = data;
+      }
+    );
+
+    $httpBackend.flush();
+
+    expect(result).toBeUndefined();
+    expect(error).toEqual(500);
+  });
+
   it('should return menu items for specific menu item short name', function() {
     var shortName = "A1";
     var httpResponse = { menu_items: 'A1' };
@@ -51,18 +72,28 @@ describe("MenuServiceTests", function() {
     $httpBackend.flush();
   });
 
-  it('should return Error Code for specific menu item short name', function() {
-    var shortName = "A1";
-    var httpResponse = {"status":"500","error":"Internal Server Error"};
+  it('should return Error Message for specific menu item short name', function() {
+    var shortName = "ABC";
+    var result;
+    var errorObj = {status: "500", error: "Internal Server Error"};
+    var errorMsg = "network error:"+errorObj;
 
     $httpBackend.when('GET', ApiPath + '/menu_items/'+shortName+ '.json')
-      .respond(500, httpResponse);
+      .respond(500);
 
-    menuservice.getFavoriteMenuItems(shortName).then(function(data) {
-      expect(data).toEqual(500);
-    });
+    menuservice.getFavoriteMenuItems(shortName).then(
+      function(data) {
+        result = data;
+      },
+      function(data) {
+        error = data;
+      }
+    );
 
     $httpBackend.flush();
+
+    expect(result).toBeUndefined();
+    expect(error).toEqual(errorMsg);
   });
 
 });

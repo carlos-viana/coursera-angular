@@ -4,8 +4,8 @@
   angular.module('common')
     .service('MenuService', MenuService);
 
-  MenuService.$inject = ['$http', 'ApiPath'];
-  function MenuService($http, ApiPath) {
+  MenuService.$inject = ['$http', '$q','ApiPath'];
+  function MenuService($http, $q, ApiPath) {
     var service = this;
 
     service.getCategories = function() {
@@ -21,29 +21,33 @@
           'category': category
         };
       }
+      var deferred = $q.defer();
 
-      return $http.get(ApiPath + '/menu_items.json', config)
+      $http.get(ApiPath + '/menu_items.json', config)
         .then(
           function(response) {
-            return response.data;
+            deferred.resolve(response.data);
           },
           function(error) {
-            return error.status;
-          }
-      );
-    };
+            deferred.reject(error.status);
+          });
+
+      return deferred.promise;
+    }// end getMenuItems
 
     service.getFavoriteMenuItems = function(shortName) {
-      return $http.get(ApiPath + '/menu_items/' + shortName + '.json')
+      var deferred = $q.defer();
+
+      $http.get(ApiPath + '/menu_items/' + shortName + '.json')
         .then(
           function sucessCall(response) {
-            console.log("[DEBUG] AT MenuService - response.data: ", response.data);
-            return response.data;
+            deferred.resolve(response.data);
           },
           function errorCall(error) {
-            return error.status;
-          }
-        );
+            deferred.reject("network error:"+error);
+          });
+
+      return deferred.promise;
     } // end getMatchedMenuItems
 
   } // end MenuService
