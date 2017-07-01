@@ -11,6 +11,7 @@ function SignupController(MenuService, SignupService) {
     vm.hasMenuItems = null;
     vm.dataWasSaved = false;
     vm.menuitem = null;
+    vm.menunumber = null;
   }
 
   vm.checkForMenuItems = function() {
